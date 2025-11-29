@@ -1,3 +1,7 @@
+/* ===========================
+   LOGO KAMPUS DI HEADER
+   =========================== */
+
 .logo-image {
   width: 48px;
   height: 48px;
@@ -5,4 +9,150 @@
   border-radius: 0;
   padding: 0;
   box-shadow: none;
+}
+
+/* ===========================
+   TOGGLE SOSMED UMS
+   =========================== */
+
+/* Bungkus tombol "Tentang Unimas" + ikon sosmed */
+.social-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* Checkbox tak terlihat yang jadi pemicu animasi */
+.social-toggle input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Teks tombol utama – klik tetap di label, bukan di span ini */
+.social-main {
+  pointer-events: none;
+}
+
+/* Kumpulan ikon sosmed yang tersembunyi di awal */
+.social-icons {
+  display: flex;
+  gap: 8px;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  overflow: hidden;
+  transition:
+    max-width 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Saat checkbox ON, kontainer ikon muncul/geser */
+.social-toggle input:checked ~ .social-icons {
+  max-width: 280px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bentuk dasar bulatan sosmed */
+.social-bubble {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
+  transform: scale(.85);
+}
+
+/* Hover kecil */
+.social-bubble:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+}
+
+/* ===========================
+   ANIMASI "BOLA KELUAR BERPUTAR"
+   =========================== */
+
+@keyframes bubble-pop {
+  0% {
+    transform: translateX(-16px) scale(0) rotate(-120deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(0) scale(1.15) rotate(12deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Saat toggle ON, tiap bubble dianimasikan */
+.social-toggle input:checked ~ .social-icons .social-bubble {
+  animation: bubble-pop 0.45s ease-out forwards;
+}
+
+/* Delay supaya keluar satu per satu */
+.social-toggle input:checked ~ .social-icons .social-bubble:nth-child(1) {
+  animation-delay: 0s;
+}
+.social-toggle input:checked ~ .social-icons .social-bubble:nth-child(2) {
+  animation-delay: 0.05s;
+}
+.social-toggle input:checked ~ .social-icons .social-bubble:nth-child(3) {
+  animation-delay: 0.10s;
+}
+.social-toggle input:checked ~ .social-icons .social-bubble:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+/* ===========================
+   WARNA MASING-MASING SOSMED
+   =========================== */
+
+.social-bubble.ig {
+  background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+}
+
+.social-bubble.yt {
+  background: #ff0000;   /* merah YouTube */
+}
+
+.social-bubble.tt {
+  background: #000000;   /* hitam TikTok */
+}
+
+.social-bubble.location {
+  background: #007f4f;   /* hijau lokasi */
+}
+
+/* ===========================
+   LOGO GAMBAR DI DALAM BULATAN
+   =========================== */
+
+.social-icon-img {
+  width: 110%;
+  height: 110%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* Bubble khusus yang berisi gambar logo */
+.social-bubble.img-bubble {
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, .08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
