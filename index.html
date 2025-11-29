@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kemandirian & Ketahanan Pangan Lokal – Agribisnis Universitas Mayjen Sungkono</title>
+  <title>Kemandirian & Ketahanan Pangan Lokal – Agribisnis Universitas Mayjen Sungkono</title>
 
-<link rel="stylesheet" href="style.css">
+  <!-- CSS eksternal (logo & sosmed bubble) -->
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AOS CSS (animasi scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
     :root {
@@ -41,6 +45,7 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background 0.4s ease, color 0.3s ease;
     }
 
     .page {
@@ -56,27 +61,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .logo {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .logo-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #cde8b8, #4a8f54);
-      box-shadow: 0 8px 18px rgba(22,70,30,.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 20px;
-      font-weight: 700;
     }
 
     .logo-text {
@@ -109,6 +100,12 @@
       box-shadow: 0 0 0 4px rgba(63,138,74,.25);
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     nav {
       display: flex;
       align-items: center;
@@ -126,13 +123,41 @@
       transition:
         background var(--transition-fast),
         transform var(--transition-fast),
-        box-shadow var(--transition-fast);
+        box-shadow var(--transition-fast),
+        color var(--transition-fast);
     }
 
     nav a:hover {
       background: rgba(63,138,74,.1);
       transform: translateY(-1px);
       box-shadow: 0 8px 16px rgba(0,0,0,.08);
+    }
+
+    /* THEME TOGGLE */
+
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(63,138,74,.35);
+      background: rgba(255,255,255,.9);
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,.08);
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.18);
+      background: #fdfaf5;
     }
 
     /* HERO */
@@ -257,13 +282,7 @@
       opacity: .7;
     }
 
-    .btn-secondary {
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(35,75,40,.25);
-      color: var(--earth-dark);
-      box-shadow: var(--shadow-light);
-    }
-
+    /* Tombol gradasi "Tentang Unimas" */
     .btn-ig {
       background: linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4);
       color: #fff;
@@ -284,31 +303,6 @@
 
     .btn:hover span.arrow {
       transform: translateX(4px);
-    }
-
-    .hero-meta {
-      font-size: .8rem;
-      color: #3e4a38;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .hero-meta-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(139,90,43,.25);
-    }
-
-    .hero-meta-badge {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      background: linear-gradient(145deg, var(--earth), var(--green));
     }
 
     /* FOTO DI KANAN */
@@ -359,7 +353,7 @@
     /* SECTIONS */
 
     main {
-      margin-top: 32px;
+      margin-top: 24px;
       display: grid;
       gap: 24px;
     }
@@ -552,7 +546,7 @@
     footer {
       margin-top: 18px;
       font-size: .8rem;
-      color: #444;
+      color: #ddd;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -560,6 +554,10 @@
       align-items: center;
       border-top: 1px solid rgba(139,90,43,.18);
       padding-top: 10px;
+    }
+
+    footer span {
+      color: #444;
     }
 
     footer a {
@@ -575,12 +573,101 @@
       border-color: rgba(75,46,36,.9);
     }
 
+    /* DARK THEME OVERRIDES */
+
+    body[data-theme="dark"] {
+      background:
+        radial-gradient(circle at top left, rgba(20,50,34,.9), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(50,32,20,.9), transparent 55%),
+        linear-gradient(180deg, #050706 0%, #090c0a 40%, #050605 100%);
+      color: #f5f5f5;
+    }
+
+    body[data-theme="dark"] .logo-text {
+      color: #e6f7ec;
+    }
+
+    body[data-theme="dark"] .pill-badge {
+      background: rgba(19,77,42,.4);
+      border-color: rgba(159,231,176,.5);
+      color: #e6f7ec;
+    }
+
+    body[data-theme="dark"] nav a {
+      color: #f2f6f2;
+    }
+
+    body[data-theme="dark"] nav a:hover {
+      background: rgba(159,231,176,.16);
+    }
+
+    body[data-theme="dark"] .theme-toggle {
+      background: #101813;
+      border-color: rgba(159,231,176,.5);
+      color: #f5f5f5;
+    }
+
+    body[data-theme="dark"] .hero {
+      background:
+        radial-gradient(circle at top left, rgba(24,70,40,.9), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(76,46,26,.9), transparent 55%);
+      box-shadow: 0 20px 50px rgba(0,0,0,.8);
+    }
+
+    body[data-theme="dark"] .hero-subtitle {
+      color: #e1f0e4;
+    }
+
+    body[data-theme="dark"] section {
+      background: rgba(9,14,11,.96);
+      border-color: rgba(199,159,110,.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,.7);
+    }
+
+    body[data-theme="dark"] .section-title {
+      color: #e6f7ec;
+    }
+
+    body[data-theme="dark"] .section-tagline {
+      color: #c9c5ad;
+    }
+
+    body[data-theme="dark"] .highlight-box {
+      background: linear-gradient(145deg, rgba(61,102,66,.9), rgba(120,80,50,.9));
+      border-color: rgba(255,226,176,.5);
+    }
+
+    body[data-theme="dark"] .card {
+      background: linear-gradient(160deg, rgba(18,24,20,.98), rgba(23,30,24,.98));
+      border-color: rgba(199,159,110,.45);
+      box-shadow: 0 14px 32px rgba(0,0,0,.8);
+    }
+
+    body[data-theme="dark"] .card-title {
+      color: #e6f7ec;
+    }
+
+    body[data-theme="dark"] .cta-section {
+      background:
+        linear-gradient(135deg, rgba(20,86,46,.98), rgba(31,19,12,.98)),
+        radial-gradient(circle at 0% 0%, rgba(255,221,160,.6), transparent 55%);
+    }
+
+    body[data-theme="dark"] footer span {
+      color: #e0e0e0;
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 860px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
       }
 
       .hero {
@@ -632,28 +719,34 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="light">
   <div class="page">
-    <header>
-     <div class="logo">
-  <img src="logo-kampus.png" alt="Logo Universitas Mayjen Sungkono" class="logo-image">
-  <div>
-    <div class="logo-text">Fakultas Pertanian – Universitas Mayjen Sungkono</div>
-    <div class="pill-badge">
-      <span class="pill-dot"></span>
-      Proyek Sistem Informasi Manajemen Pertanian
-    </div>
-  </div>
-</div>
-      <nav>
-        <a href="#mengapa">Mengapa Penting</a>
-        <a href="#prinsip">Prinsip Utama</a>
-        <a href="#aksi">Aksi Nyata</a>
-        <a href="#tim">Proyek & Tim</a>
-      </nav>
+    <!-- HEADER -->
+    <header data-aos="fade-down">
+      <div class="logo">
+        <img src="logo-kampus.png" alt="Logo Universitas Mayjen Sungkono" class="logo-image">
+        <div>
+          <div class="logo-text">Fakultas Pertanian – Universitas Mayjen Sungkono</div>
+          <div class="pill-badge">
+            <span class="pill-dot"></span>
+            Proyek Sistem Informasi Manajemen Pertanian
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav>
+          <a href="#mengapa">Mengapa Penting</a>
+          <a href="#prinsip">Prinsip Utama</a>
+          <a href="#aksi">Aksi Nyata</a>
+          <a href="#tim">Proyek & Tim</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Ganti tema terang/gelap">🌙</button>
+      </div>
     </header>
 
-    <section class="hero" id="top">
+    <!-- HERO -->
+    <section class="hero" id="top" data-aos="fade-up">
       <div class="hero-content">
         <div class="hero-kicker">Kemandirian & Ketahanan Pangan Lokal</div>
         <h1 class="hero-title">
@@ -672,28 +765,12 @@
             Pelajari Isu Ketahanan Pangan
             <span class="arrow">↓</span>
           </a>
-          <a href="https://www.instagram.com/univ.mayjensungkono/"
-             target="_blank" rel="noopener noreferrer"
-             class="btn btn-ig">
-            Instagram Universitas Mayjen Sungkono
-          </a>
-        </div>
-
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span class="hero-meta-badge"></span>
-            Mahasiswa Agribisnis Semester 7 – Universitas Mayjen Sungkono
-          </div>
-          <div class="hero-meta-item">
-            👨‍🏫 Dosen pengampu: Edwin Pondi Suwanto, S.Si, M.Si
-          </div>
         </div>
       </div>
 
-      <!-- FOTO KAMU DI SINI -->
-      <div class="hero-visual" aria-hidden="true">
+      <!-- FOTO KANAN -->
+      <div class="hero-visual" aria-hidden="true" data-aos="zoom-in" data-aos-delay="150">
         <div class="hero-photo-wrapper">
-          <!-- Pastikan file di folder yang sama bernama banner-pangan.jpg -->
           <img src="banner-pangan.jpg"
                alt="Ilustrasi pangan lokal: Pangan Lokal, Kita yang Jaga">
           <div class="hero-photo-overlay"></div>
@@ -702,8 +779,8 @@
     </section>
 
     <main>
-      <!-- Mengapa penting -->
-      <section id="mengapa">
+      <!-- MENGAPA -->
+      <section id="mengapa" data-aos="fade-up">
         <div class="section-header">
           <h2 class="section-title">Mengapa Kemandirian Pangan Lokal Sangat Penting?</h2>
           <p class="section-tagline">Pangan lokal yang kuat, fondasi kedaulatan bangsa.</p>
@@ -734,7 +811,7 @@
             </ul>
           </div>
           <div>
-            <div class="highlight-box">
+            <div class="highlight-box" data-aos="fade-left" data-aos-delay="150">
               <strong>Kemandirian pangan</strong> dimulai dari pilihan sederhana:
               apa yang kita tanam di pekarangan, apa yang kita beli di pasar,
               dan dari siapa kita membeli. Dengan
@@ -746,15 +823,15 @@
         </div>
       </section>
 
-      <!-- Prinsip -->
-      <section id="prinsip">
+      <!-- PRINSIP -->
+      <section id="prinsip" data-aos="fade-up">
         <div class="section-header">
           <h2 class="section-title">Tiga Prinsip Kunci Kemandirian Pangan</h2>
-          <p class="section-tagline">Dari sawah hingga meja makan, semua saling terhubung.</p>
+        <p class="section-tagline">Dari sawah hingga meja makan, semua saling terhubung.</p>
         </div>
 
         <div class="card-grid">
-          <article class="card">
+          <article class="card" data-aos="zoom-in" data-aos-delay="0">
             <div class="card-label">Prinsip #1</div>
             <div class="card-title">Produksi Berkelanjutan & Lokal</div>
             <div class="card-icon">🌱</div>
@@ -765,7 +842,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="zoom-in" data-aos-delay="120">
             <div class="card-label">Prinsip #2</div>
             <div class="card-title">Distribusi Adil & Dekat</div>
             <div class="card-icon">🧺</div>
@@ -776,7 +853,7 @@
             </p>
           </article>
 
-          <article class="card">
+          <article class="card" data-aos="zoom-in" data-aos-delay="240">
             <div class="card-label">Prinsip #3</div>
             <div class="card-title">Konsumsi Bijak & Beragam</div>
             <div class="card-icon">🍚</div>
@@ -789,8 +866,8 @@
         </div>
       </section>
 
-      <!-- Aksi -->
-      <section id="aksi">
+      <!-- AKSI -->
+      <section id="aksi" data-aos="fade-up">
         <div class="section-header">
           <h2 class="section-title">Langkah Sederhana yang Bisa Kamu Mulai Hari Ini</h2>
           <p class="section-tagline">Gerakan besar dimulai dari kebiasaan kecil yang konsisten.</p>
@@ -822,7 +899,7 @@
             </ul>
           </div>
           <div>
-            <div class="highlight-box">
+            <div class="highlight-box" data-aos="fade-left" data-aos-delay="150">
               Website sederhana ini dibuat sebagai
               <strong>media edukasi digital</strong> oleh mahasiswa Agribisnis
               Universitas Mayjen Sungkono dalam mata kuliah
@@ -839,7 +916,7 @@
       </section>
 
       <!-- PROYEK & TIM -->
-      <section id="tim">
+      <section id="tim" data-aos="fade-up">
         <div class="section-header">
           <h2 class="section-title">Tentang Proyek & Tim Penyusun</h2>
           <p class="section-tagline">Tugas kelompok mata kuliah Sistem Informasi Manajemen Pertanian.</p>
@@ -866,7 +943,7 @@
             </p>
           </div>
           <div>
-            <div class="highlight-box">
+            <div class="highlight-box" data-aos="fade-left" data-aos-delay="150">
               <strong>Anggota Kelompok:</strong>
               <ul class="checklist">
                 <li><span class="check-icon">👤</span>Adeliya Retno Wulandari – 2022021001</li>
@@ -883,7 +960,7 @@
       </section>
 
       <!-- CTA AKHIR -->
-      <section class="cta-section" id="gabung">
+      <section class="cta-section" id="gabung" data-aos="fade-up">
         <div class="cta-inner">
           <h2 class="cta-title">Mari Jaga Pangan Lokal, Mulai dari Meja Makan Kita</h2>
           <p class="cta-text">
@@ -891,17 +968,51 @@
             bahwa <strong>pangan lokal</strong> bukan hanya soal kenyang,
             tetapi juga tentang <strong>identitas, keberlanjutan, dan masa depan petani Indonesia</strong>.
           </p>
+
           <div class="hero-actions" style="justify-content:center;margin-bottom:6px;">
             <a href="#top" class="btn btn-primary">
               Kembali ke Atas
               <span class="arrow">↑</span>
             </a>
-            <a href="https://www.instagram.com/univ.mayjensungkono/"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn-ig">
-              Kunjungi Instagram Univ. Mayjen Sungkono
-            </a>
+
+            <!-- Toggle sosmed di CTA -->
+            <label class="social-toggle">
+              <input type="checkbox">
+              <span class="btn btn-ig social-main">
+                Tentang Unimas
+              </span>
+              <span class="social-icons">
+                <a href="https://www.instagram.com/univ.mayjensungkono/"
+                   target="_blank" rel="noopener noreferrer"
+                   class="social-bubble ig img-bubble"
+                   aria-label="Instagram Universitas Mayjen Sungkono">
+                  <img src="logo-instagram.png"
+                       alt="Logo Instagram Universitas Mayjen Sungkono"
+                       class="social-icon-img">
+                </a>
+
+                <a href="https://maps.google.com/?q=Jl.+Irian+Jaya+No.+04+Mojokerto+61321"
+                   target="_blank" rel="noopener noreferrer"
+                   class="social-bubble location"
+                   aria-label="Lokasi Universitas Mayjen Sungkono">📍</a>
+
+                <a href="https://youtube.com/@universitasmayjensungkono?si=AhL-eADrwAGrtMJO"
+                   target="_blank" rel="noopener noreferrer"
+                   class="social-bubble yt"
+                   aria-label="YouTube Universitas Mayjen Sungkono">▶</a>
+
+                <a href="https://www.tiktok.com/@univmayjensungkono"
+                   target="_blank" rel="noopener noreferrer"
+                   class="social-bubble tt img-bubble"
+                   aria-label="TikTok Universitas Mayjen Sungkono">
+                  <img src="logo-tiktok.png"
+                       alt="Logo TikTok Universitas Mayjen Sungkono"
+                       class="social-icon-img">
+                </a>
+              </span>
+            </label>
           </div>
+
           <p class="cta-note">
             Terima kasih sudah berkunjung. Kritik dan saran bisa disampaikan
             langsung kepada kami di kelas atau melalui media sosial kampus.
@@ -910,15 +1021,50 @@
       </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
       <span>
         © 2025 Mahasiswa Agribisnis Universitas Mayjen Sungkono – 
-        Tugas Mata Kuliah Sistem  Informasi Manajemen Pertanian.
+        Website tugas Sistem Informasi Manajemen Pertanian.
       </span>
       <span>
-        Dosen pengampu: Edwin Pondi Suwanto, S.Si, M.Si
+        Kontak: unimasmjk@gmail.com · Dibuat dengan semangat belajar & cinta pangan lokal 🌱
       </span>
     </footer>
   </div>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      offset: 80,
+      once: true
+    });
+
+    // THEME TOGGLE JS
+    const body = document.body;
+    const themeBtn = document.querySelector('.theme-toggle');
+
+    function setTheme(isDark) {
+      if (isDark) {
+        body.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+      } else {
+        body.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+      }
+    }
+
+    // default: light
+    setTheme(false);
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        setTheme(!isDark);
+      });
+    }
+  </script>
 </body>
 </html>
