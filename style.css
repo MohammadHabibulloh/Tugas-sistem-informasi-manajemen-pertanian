@@ -12,7 +12,7 @@
 }
 
 /* ===========================
-   TOGGLE SOSMED UMS
+   TOGGLE SOSMED UNIMAS
    =========================== */
 
 /* Bungkus tombol "Tentang Unimas" + ikon sosmed */
@@ -40,7 +40,7 @@
 .social-icons {
   display: flex;
   gap: 8px;
-  max-width: 0;
+  max-width: 0;            /* disembunyikan */
   opacity: 0;
   transform: translateX(-8px);
   overflow: hidden;
@@ -70,6 +70,7 @@
   color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
   transform: scale(.85);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 /* Hover kecil */
@@ -140,9 +141,10 @@
    LOGO GAMBAR DI DALAM BULATAN
    =========================== */
 
+/* Gambar IG & TikTok supaya pas di tengah dan ikut bulat */
 .social-icon-img {
-  width: 110%;
-  height: 110%;
+  width: 80%;        /* atur "zoom" logo di sini */
+  height: 80%;
   object-fit: contain;
   border-radius: 50%;
 }
@@ -154,5 +156,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden;  /* potong sudut gambar kalau ada */
 }
